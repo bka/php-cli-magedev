@@ -45,31 +45,22 @@ class Main extends AbstractImage
             $buildStrategy = $dockerConfig['build_strategy'];
         }
 
-        // PHP Image is selected based on magento version
-        if ($magentoVersion == '2') {
-            if ($buildStrategy == 'pull') {
-                $phpVersion = null;
-                if ($this->config->optionExists('php_version')) {
-                    $phpVersion = $this->config->get('php_version');
-                }
-                if(!empty($phpVersion)){
-                    $this->from('bleers/magedev-php'.$phpVersion.':1.0');
-                }else{
-                    $this->from('bleers/magedev-php7:1.0');
-                }
-            }
-            if ($buildStrategy == 'build') {
-                $this->from($this->imageFactory->create('Php7'));
-            }
+        $phpVersion = null;
+        $imageVersion = '1.0';
+        if ($this->config->optionExists('php_version')) {
+            $phpVersion = $this->config->get('php_version');
+        } else {
+            $phpVersion = ($magentoVersion == '1') ? '5' : '7';
+        }
+        if ($this->config->optionExists('image_version')) {
+            $imageVersion = $this->config->get('image_version');
         }
 
-        if ($magentoVersion == '1') {
-            if ($buildStrategy == 'pull') {
-                $this->from('bleers/magedev-php5:1.0');
-            }
-            if ($buildStrategy == 'build') {
-                $this->from($this->imageFactory->create('Php5'));
-            }
+        if ($buildStrategy == 'pull') {
+            $this->from('bleers/magedev-php'.$phpVersion.':'.$imageVersion);
+        }
+        if ($buildStrategy == 'build') {
+            $this->from($this->imageFactory->create('Php'.$phpVersion));
         }
 
         $uid = getmyuid();
