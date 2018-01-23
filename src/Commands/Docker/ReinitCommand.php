@@ -40,6 +40,7 @@ class ReinitCommand extends AbstractCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $this->getApplication()->find('docker:stop')->execute($input, $output);
+        $this->getApplication()->find('docker:destroy')->execute($input, $output);
         $this->getApplication()->find('docker:build')->execute($input, $output);
         $this->getApplication()->find('docker:start')->execute($input, $output);
     }
