@@ -33,6 +33,6 @@ class ElasticSearch extends AbstractContainer
      */
     public function getImage()
     {
-        return 'elasticsearch:1.7.5';
+        return 'elasticsearch:5.4.3';
     }
 }
