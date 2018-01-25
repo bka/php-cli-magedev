@@ -28,5 +28,13 @@ class Elasticsearch extends AbstractImage
         // install some packages
         $this->run('~/bin/elasticsearch-plugin remove x-pack');
         $this->run('~/bin/elasticsearch-plugin install http://xbib.org/repository/org/xbib/elasticsearch/plugin/elasticsearch-analysis-decompound/5.4.3.0/elasticsearch-analysis-decompound-5.4.3.0-plugin.zip');
+
+        $this->env('discovery.type','single-node');
+        $this->env('ES_JAVA_OPTS','-Xms512m -Xmx512m');
+
+        $this->expose('9200');
+        $this->expose('9300');
+
+        $this->cmd('bin/es-docker');
     }
 }
