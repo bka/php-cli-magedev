@@ -33,6 +33,7 @@ class ElasticSearch extends AbstractContainer
      */
     public function getImage()
     {
-        return 'elasticsearch:5.4.3';
+        #return 'elasticsearch:5.4.3';
+        return $this->imageFactory->create('Elasticsearch');
     }
 }
