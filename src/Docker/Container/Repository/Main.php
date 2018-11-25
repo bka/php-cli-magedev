@@ -52,7 +52,11 @@ class Main extends AbstractContainer
 
         if ($this->config->optionExists('modules_path')) {
             $modulesPath = $this->config->get('modules_path');
-            $binds[] = $modulesPath . ':' . $modulesPath;
+            if (is_array($modulesPath) && count($modulesPath) > 1) {
+                $binds[] = $this->config->getFileHelper()->expandPath($modulesPath[0]) . ':' . $modulesPath[1];
+            } else {
+                $binds[] = $modulesPath . ':' . $modulesPath;
+            }
         }
 
         // TODO: make this configurable ?

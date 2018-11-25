@@ -228,4 +228,14 @@ class Config
         }
         return $merged;
     }
+
+    /**
+     * getFileHelper
+     * @return FileHelper
+     *
+     */
+    public function getFileHelper()
+    {
+        return $this->fileHelper;
+    }
 }
