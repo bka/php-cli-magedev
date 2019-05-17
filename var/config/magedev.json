@@ -28,7 +28,8 @@
       "Main",
       "Mysql",
       "Redis",
-      "Varnish"
+      "Varnish",
+      "Varnish3"
     ],
     "links": {
       "main": ["mysql", "redis", "elasticsearch"]
