@@ -69,7 +69,7 @@ class ComposerCommand extends AbstractCommand
         $magentoVersion = $this->config->getMagentoVersion();
         // composer only used for magento2
         if ($magentoVersion == '2') {
-            $this->dockerService->execute('/usr/bin/loadssh.sh && composer install');
+            $this->dockerService->execute('/usr/bin/loadssh.sh && composer install --ignore-platform-reqs');
         }
     }
 }

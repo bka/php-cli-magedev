@@ -87,7 +87,11 @@ class FileHelper
      */
     public function fileExists($path)
     {
-        return file_exists($path);
+        try {
+            return file_exists($path) || file_exists($this->findPath($path));
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**

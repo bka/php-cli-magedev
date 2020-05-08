@@ -111,5 +111,8 @@ class Main extends AbstractImage
 
         // expose grunt port
         $this->expose("35729");
+
+        // expose ssl
+        $this->expose("443");
     }
 }

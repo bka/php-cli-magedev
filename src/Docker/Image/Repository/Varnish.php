@@ -44,7 +44,7 @@ class Varnish extends AbstractImage
         }
 
         if ($buildStrategy == 'pull') {
-            $this->from('bleers/magedev-varnish4:1.0');
+            $this->from('bleers/varnish:1.1');
         }
         if ($buildStrategy == 'build') {
             $this->from($this->imageFactory->create("Varnish4"));
@@ -53,5 +53,7 @@ class Varnish extends AbstractImage
         $this->addFile('var/Docker/varnish/conf/supervisord.conf', '/etc/supervisor/conf.d/supervisord.conf');
         $this->addFile('var/Docker/varnish/etc/default/varnish', '/etc/default/varnish');
         $this->addFile('var/Docker/varnish/etc/varnish/default.vcl', '/etc/varnish/default.vcl');
+        $this->addFile('var/Docker/varnish/start.sh', '/start.sh');
+
     }
 }
