@@ -50,7 +50,8 @@ class Main extends AbstractImage
         if ($this->config->optionExists('php_version')) {
             $phpVersion = $this->config->get('php_version');
         } else {
-            $phpVersion = ($magentoVersion == '1') ? '5' : '7';
+            // default to current version
+            $phpVersion = "7.3";
         }
         if ($this->config->optionExists('image_version')) {
             $imageVersion = $this->config->get('image_version');
