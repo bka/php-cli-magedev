@@ -98,8 +98,8 @@ class Main extends AbstractImage
         $this->addFile("var/Docker/mysql/my.cnf","/var/www/.my.cnf");
         $this->run("chown www-data:www-data /var/www/.my.cnf");
 
-        $this->run("curl -O https://getcomposer.org/composer.phar");
-        $this->run("mv composer.phar /usr/bin/composer");
+        $this->run("curl -O https://getcomposer.org/composer-stable.phar");
+        $this->run("mv composer-stable.phar /usr/bin/composer");
         $this->run("chmod 777 /usr/bin/composer");
         $this->run("chmod +x /usr/bin/composer");
 
