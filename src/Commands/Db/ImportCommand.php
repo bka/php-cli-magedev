@@ -87,7 +87,7 @@ class ImportCommand extends AbstractCommand
             if (!file_exists(getcwd().$dumpFile)) {
                 // copy it to project folder
                 $this->shellService->execute('cp '.$dumpFile.' '.$sourceFolder);
-                $this->dockerService->execute('mysql < '.basename($dumpFile));
+                $this->dockerService->execute('mysql -uroot -proot < '.basename($dumpFile));
             }
         }
         parent::execute($input, $output);
