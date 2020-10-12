@@ -9,6 +9,18 @@ use TeamNeusta\Magedev\Docker\Image\AbstractImage;
 class Elasticsearch extends AbstractImage
 {
     /**
+     * getBuildName.
+     *
+     * @return string
+     */
+    public function getBuildName()
+    {
+        return $this->nameBuilder->buildName(
+             $this->getName()
+        );
+    }
+
+    /**
      * configure.
      */
     public function configure()
@@ -38,4 +50,6 @@ class Elasticsearch extends AbstractImage
 
         $this->cmd('bin/es-docker');
     }
+
+
 }

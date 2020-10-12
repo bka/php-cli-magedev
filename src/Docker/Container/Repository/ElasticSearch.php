@@ -35,4 +35,15 @@ class ElasticSearch extends AbstractContainer
     {
         return $this->imageFactory->create('Elasticsearch');
     }
+
+    public function getConfig()
+    {
+        $config = parent::getConfig();
+        $env = $config->getEnv();
+        $env = array_merge($env, [
+            'xpack.security.enabled=false'
+        ]);
+        $config->setEnv($env);
+        return $config;
+    }
 }
