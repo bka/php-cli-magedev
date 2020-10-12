@@ -67,7 +67,7 @@ class RefreshCommand extends AbstractCommand
     {
         $magentoVersion = $this->config->getMagentoVersion();
         if ($magentoVersion == '2') {
-            $this->dockerService->execute('/usr/local/bin/grunt refresh');
+            $this->dockerService->execute('grunt refresh');
         }
     }
 }
