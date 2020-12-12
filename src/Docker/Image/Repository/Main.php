@@ -94,6 +94,14 @@ class Main extends AbstractImage
 
         $this->run("chmod 775 /usr/local/etc/php/php.ini"); // for www-data to read it
 
+        $xdebugIniPath = "var/Docker/main/xdebug/php-".$phpVersion.".ini";
+        if ($this->fileHelper->fileExists($xdebugIniPath)) {
+            $xdebugIni = $this->fileHelper->read($xdebugIniPath);
+            $xdebugIni = str_replace("\$GATEWAY", $gatewayIp, $xdebugIni);
+            $this->add("/usr/local/etc/php/conf.d/xdebug.ini.dis", $xdebugIni);
+            $this->run("chmod 775 /usr/local/etc/php/conf.d/xdebug.ini.dis"); // for www-data to read it
+        }
+
         $this->addFile("var/Docker/mysql/my.cnf","/root/.my.cnf");
         $this->addFile("var/Docker/mysql/my.cnf","/var/www/.my.cnf");
         $this->run("chown www-data:www-data /var/www/.my.cnf");

@@ -176,6 +176,10 @@ $c['commands'] = function ($c) {
         new \TeamNeusta\Magedev\Commands\Tests\DebugCommand($c['runtime.config'], $c['services.docker']),
         new \TeamNeusta\Magedev\Commands\Tests\RunCommand($c['runtime.config'], $c['services.docker']),
 
+        new \TeamNeusta\Magedev\Commands\Xdebug\OffCommand($c['services.docker']),
+        new \TeamNeusta\Magedev\Commands\Xdebug\OnCommand($c['services.docker']),
+
+
         new \TeamNeusta\Magedev\Commands\UpdateCommand(),
     ];
 };

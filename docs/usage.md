@@ -75,3 +75,14 @@ Magedev provides a task to run any magento console command (bin/magento).
     magento:command <command>    Execute command with bin/magento
 
 The placeholder `<command>` can be any console command, that exists in magento, e.g.: `index:reindex` or `sampledata:deploy`
+
+# Turn xdebug on/off
+
+Turn xdebug on:
+
+    xdebug:on
+
+or off:
+
+    xdebug:off
+
