@@ -20,10 +20,27 @@ class Elasticsearch extends AbstractImage
         );
     }
 
-    /**
-     * configure.
-     */
     public function configure()
+    {
+        if ($this->config->optionExists('es_version')) {
+            $esVersion = $this->config->get('es_version');
+        } else {
+            // default to current version
+            $esVersion = "5.4.3";
+        }
+
+        if ($esVersion == "5.4.3") {
+            $this->initESDefault();
+        } else {
+            $this->initESByVersion($esVersion);
+        }
+    }
+
+    /**
+     * initESDefault
+     *
+     */
+    public function initESDefault()
     {
         $this->name('elasticsearch');
         $this->from('docker.elastic.co/elasticsearch/elasticsearch:5.4.3');
@@ -37,10 +54,6 @@ class Elasticsearch extends AbstractImage
                 $this->run('pear config-set http_proxy  '.$httpProxy);
             }
         }
-        // install some packages
-        /* $this->run('~/bin/elasticsearch-plugin remove x-pack'); */
-        /* $this->run('~/bin/elasticsearch-plugin install http://xbib.org/repository/org/xbib/elasticsearch/plugin/elasticsearch-analysis-decompound/5.4.3.0/elasticsearch-analysis-decompound-5.4.3.0-plugin.zip'); */
-        /* $this->run('~/bin/elasticsearch-plugin install analysis-phonetic'); */
 
         $this->env('discovery.type','single-node');
         $this->env('ES_JAVA_OPTS','-Xms512m -Xmx512m');
@@ -51,5 +64,18 @@ class Elasticsearch extends AbstractImage
         $this->cmd('bin/es-docker');
     }
 
+    protected function initESByVersion($version)
+    {
+        $this->name('elasticsearch');
+        $this->from('elasticsearch:' . $version);
 
+        $this->env('discovery.type','single-node');
+        $this->env('ES_JAVA_OPTS','-Xms512m -Xmx512m');
+
+        $this->run('bin/elasticsearch-plugin install analysis-phonetic');
+        $this->run('bin/elasticsearch-plugin install analysis-icu');
+
+        $this->expose('9200');
+        $this->expose('9300');
+    }
 }
